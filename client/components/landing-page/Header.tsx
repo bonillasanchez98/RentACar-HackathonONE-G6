@@ -48,11 +48,11 @@ export default function Header() {
                   <NavLinks variant='mobile' />
                   <div className='flex flex-col gap-2'>
                     <Button className='w-full' asChild>
-                      <Link href='/login'>Login</Link>
+                      <Link href='/signin'>Sign In</Link>
                     </Button>
 
                     <Button className='w-full' variant={'outline'} asChild>
-                      <Link href='/register'>Register</Link>
+                      <Link href='/signup'>Sign Up</Link>
                     </Button>
                   </div>
                 </div>
@@ -72,11 +72,11 @@ export default function Header() {
 
         <div className='hidden gap-3 items-center md:flex'>
           <Button asChild>
-            <Link href='/login'>Login</Link>
+            <Link href='/signin'>Sign In</Link>
           </Button>
 
           <Button variant={'ghost'} asChild>
-            <Link href='/signup'>Register</Link>
+            <Link href='/signup'>Sign Up</Link>
           </Button>
         </div>
       </nav>
