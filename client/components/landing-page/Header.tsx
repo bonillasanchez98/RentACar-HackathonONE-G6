@@ -21,7 +21,7 @@ const navLinks = [
 
 export default function Header() {
   return (
-    <header className='sticky top-0 flex h-16 items-center gap-4 .border-b .bg-background px-4 md:px-6 lg:px-24'>
+    <header className='sticky top-0 flex h-16 items-center gap-4 .border-b .bg-background px-4 backdrop-blur bg-white/0 md:px-6 lg:px-24 animate-nav-shadown'>
       <nav className='w-full flex gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6'>
         <div className='w-full flex items-center gap-10'>
           <div className='flex justify-between flex-row-reverse items-center gap-3 w-full md:w-auto md:justify-start md:flex-row'>
