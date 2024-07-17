@@ -30,4 +30,10 @@ public class AuthServiceImpl implements AuthService{
 
         return userDto;
     }
+
+    //Metodo para valida que el email del customer no exista
+    @Override
+    public boolean isCustomerEmailExists(String email) {
+        return userRepository.findFirstByEmail(email).isPresent();
+    }
 }

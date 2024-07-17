@@ -6,4 +6,7 @@ import one.alumni.hackathon.dto.UserDto;
 public interface AuthService {
 
     UserDto createdCustomer(SignupRequest signupRequest);
+
+    //Metodo para validacion de email existente
+    boolean isCustomerEmailExists(String email);
 }
