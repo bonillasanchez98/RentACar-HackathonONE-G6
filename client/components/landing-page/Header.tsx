@@ -76,7 +76,7 @@ export default function Header() {
           </Button>
 
           <Button variant={'ghost'} asChild>
-            <Link href='/register'>Register</Link>
+            <Link href='/signup'>Register</Link>
           </Button>
         </div>
       </nav>
