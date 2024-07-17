@@ -39,7 +39,7 @@ export default function Header() {
                   <SheetTitle>
                     <Link href='/' className='flex gap-2 items-center text-2xl'>
                       <Car01Icon className='size-7' />
-                      RenACar
+                      RentACar
                     </Link>
                   </SheetTitle>
                 </SheetHeader>
@@ -62,7 +62,7 @@ export default function Header() {
             <h1 className='font-bold text-xl'>
               <Link href='/' className='flex gap-2 items-center'>
                 <Car01Icon className='size-7' />
-                RenACar
+                RentACar
               </Link>
             </h1>
           </div>
