@@ -1,6 +1,7 @@
-import { Car01Icon, Menu02Icon } from 'hugeicons-react'
+import { Menu02Icon } from 'hugeicons-react'
 import Link from 'next/link'
 import { Button } from '../ui/button'
+import Logo from '../Logo'
 import {
   Sheet,
   SheetContent,
@@ -38,8 +39,7 @@ export default function Header() {
                 <SheetHeader>
                   <SheetTitle>
                     <Link href='/' className='flex gap-2 items-center text-2xl'>
-                      <Car01Icon className='size-7' />
-                      RentACar
+                      <Logo />
                     </Link>
                   </SheetTitle>
                 </SheetHeader>
@@ -61,8 +61,7 @@ export default function Header() {
 
             <h1 className='font-bold text-xl'>
               <Link href='/' className='flex gap-2 items-center'>
-                <Car01Icon className='size-7' />
-                RentACar
+                <Logo />
               </Link>
             </h1>
           </div>
@@ -93,10 +92,13 @@ const NavLinks = ({
 }) => {
   return (
     <ul
-      className={cn({
-        'hidden gap-3 items-center md:flex lg:gap-4': variant === 'desktop',
-        'mt-6 flex flex-col gap-3 md:hidden': variant === 'mobile'
-      })}>
+      className={cn(
+        {
+          'hidden gap-3 items-center md:flex lg:gap-4': variant === 'desktop',
+          'mt-6 flex flex-col gap-3 md:hidden': variant === 'mobile'
+        },
+        className
+      )}>
       {navLinks.map((link) => (
         <li key={link.name}>
           <Link
@@ -107,14 +109,5 @@ const NavLinks = ({
         </li>
       ))}
     </ul>
-  )
-}
-
-const Logo = ({ className }: { className: string }) => {
-  return (
-    <Link href='/' className='flex gap-2 items-center text-2xl'>
-      <Car01Icon className='size-7' />
-      RenACar
-    </Link>
   )
 }
