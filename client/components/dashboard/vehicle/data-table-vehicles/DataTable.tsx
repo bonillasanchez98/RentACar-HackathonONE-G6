@@ -1,9 +1,24 @@
 'use client'
 
-import { Button } from '@/components/ui/button'
 import {
-  ColumnDef,
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuTrigger
+} from '@/components/ui/dropdown-menu'
+import { Input } from '@/components/ui/input'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow
+} from '@/components/ui/table'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import {
   ColumnFiltersState,
+  flexRender,
   getCoreRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
@@ -12,363 +27,12 @@ import {
   useReactTable,
   VisibilityState
 } from '@tanstack/react-table'
-import { ArrowUpDown } from 'lucide-react'
-import { useState } from 'react'
+import { ChevronDown, Settings2 } from 'lucide-react'
+import React, { useState } from 'react'
+import { data, columns } from './columns'
+import { Button } from '@/components/ui/button'
 
-export type Vehicles = {
-  id: string
-  carMake: string
-  model: string
-  year: string
-  color: string
-  capacity: number
-  fueld: string
-  transmission: string
-  type: string
-  plateNumber: string
-  price: number
-}
-
-const data: Vehicles[] = [
-  {
-    id: '1',
-    year: '2018',
-    type: 'Sedan',
-    color: 'Black',
-    model: 'Accord',
-    carMake: 'Honda',
-    price: 50,
-    plateNumber: 'ABC123',
-    capacity: 5,
-    fueld: 'Gasoline',
-    transmission: 'Automatic'
-  },
-  {
-    id: '2',
-    year: '2019',
-    type: 'SUV',
-    color: 'Red',
-    model: 'CR-V',
-    carMake: 'Honda',
-    price: 60,
-    plateNumber: 'DEF456',
-    capacity: 5,
-    fueld: 'Gasoline',
-    transmission: 'Automatic'
-  },
-  {
-    id: '3',
-    year: '2017',
-    type: 'Hatchback',
-    color: 'Blue',
-    model: 'Golf',
-    carMake: 'Volkswagen',
-    price: 45,
-    plateNumber: 'GHI789',
-    capacity: 4,
-    fueld: 'Diesel',
-    transmission: 'Manual'
-  },
-  {
-    id: '4',
-    year: '2019',
-    type: 'Sedan',
-    color: 'White',
-    model: 'Camry',
-    carMake: 'Toyota',
-    price: 55,
-    plateNumber: 'JKL012',
-    capacity: 5,
-    fueld: 'Gasoline',
-    transmission: 'Automatic'
-  },
-  {
-    id: '5',
-    year: '2018',
-    type: 'SUV',
-    color: 'Silver',
-    model: 'Rav4',
-    carMake: 'Toyota',
-    price: 65,
-    plateNumber: 'MNO345',
-    capacity: 5,
-    fueld: 'Gasoline',
-    transmission: 'Automatic'
-  },
-  {
-    id: '6',
-    year: '2020',
-    type: 'Sedan',
-    color: 'Gray',
-    model: 'Corolla',
-    carMake: 'Toyota',
-    price: 50,
-    plateNumber: 'PQR678',
-    capacity: 5,
-    fueld: 'Gasoline',
-    transmission: 'Automatic'
-  },
-  {
-    id: '7',
-    year: '2016',
-    type: 'Hatchback',
-    color: 'Red',
-    model: 'Fiesta',
-    carMake: 'Ford',
-    price: 40,
-    plateNumber: 'STU901',
-    capacity: 4,
-    fueld: 'Gasoline',
-    transmission: 'Manual'
-  },
-  {
-    id: '8',
-    year: '2019',
-    type: 'SUV',
-    color: 'Black',
-    model: 'Escape',
-    carMake: 'Ford',
-    price: 60,
-    plateNumber: 'VWX234',
-    capacity: 5,
-    fueld: 'Gasoline',
-    transmission: 'Automatic'
-  },
-  {
-    id: '9',
-    year: '2017',
-    type: 'Sedan',
-    color: 'White',
-    model: 'Civic',
-    carMake: 'Honda',
-    price: 50,
-    plateNumber: 'YZA567',
-    capacity: 5,
-    fueld: 'Gasoline',
-    transmission: 'Automatic'
-  },
-  {
-    id: '10',
-    year: '2020',
-    type: 'SUV',
-    color: 'Blue',
-    model: 'Tiguan',
-    carMake: 'Volkswagen',
-    price: 70,
-    plateNumber: 'BCD890',
-    capacity: 5,
-    fueld: 'Gasoline',
-    transmission: 'Automatic'
-  },
-  {
-    id: '11',
-    year: '2019',
-    type: 'Sedan',
-    color: 'Black',
-    model: 'Accord',
-    carMake: 'Honda',
-    price: 55,
-    plateNumber: 'EFG123',
-    capacity: 5,
-    fueld: 'Gasoline',
-    transmission: 'Automatic'
-  },
-  {
-    id: '12',
-    year: '2018',
-    type: 'SUV',
-    color: 'Red',
-    model: 'CR-V',
-    carMake: 'Honda',
-    price: 65,
-    plateNumber: 'HIJ456',
-    capacity: 5,
-    fueld: 'Gasoline',
-    transmission: 'Automatic'
-  },
-  {
-    id: '13',
-    year: '2017',
-    type: 'Hatchback',
-    color: 'Blue',
-    model: 'Golf',
-    carMake: 'Volkswagen',
-    price: 45,
-    plateNumber: 'KLM789',
-    capacity: 4,
-    fueld: 'Diesel',
-    transmission: 'Manual'
-  },
-  {
-    id: '14',
-    year: '2019',
-    type: 'Sedan',
-    color: 'White',
-    model: 'Camry',
-    carMake: 'Toyota',
-    price: 60,
-    plateNumber: 'NOP012',
-    capacity: 5,
-    fueld: 'Gasoline',
-    transmission: 'Automatic'
-  },
-  {
-    id: '15',
-    year: '2018',
-    type: 'SUV',
-    color: 'Silver',
-    model: 'Rav4',
-    carMake: 'Toyota',
-    price: 70,
-    plateNumber: 'QRS345',
-    capacity: 5,
-    fueld: 'Gasoline',
-    transmission: 'Automatic'
-  },
-  {
-    id: '16',
-    year: '2020',
-    type: 'Sedan',
-    color: 'Gray',
-    model: 'Corolla',
-    carMake: 'Toyota',
-    price: 55,
-    plateNumber: 'TUV678',
-    capacity: 5,
-    fueld: 'Gasoline',
-    transmission: 'Automatic'
-  },
-  {
-    id: '17',
-    year: '2016',
-    type: 'Hatchback',
-    color: 'Red',
-    model: 'Fiesta',
-    carMake: 'Ford',
-    price: 45,
-    plateNumber: 'VWX901',
-    capacity: 4,
-    fueld: 'Gasoline',
-    transmission: 'Manual'
-  },
-  {
-    id: '18',
-    year: '2019',
-    type: 'SUV',
-    color: 'Black',
-    model: 'Escape',
-    carMake: 'Ford',
-    price: 65,
-    plateNumber: 'YZA234',
-    capacity: 5,
-    fueld: 'Gasoline',
-    transmission: 'Automatic'
-  },
-  {
-    id: '19',
-    year: '2017',
-    type: 'Sedan',
-    color: 'White',
-    model: 'Civic',
-    carMake: 'Honda',
-    price: 55,
-    plateNumber: 'BCD567',
-    capacity: 5,
-    fueld: 'Gasoline',
-    transmission: 'Automatic'
-  },
-  {
-    id: '20',
-    year: '2020',
-    type: 'SUV',
-    color: 'Blue',
-    model: 'Tiguan',
-    carMake: 'Volkswagen',
-    price: 75,
-    plateNumber: 'EFG890',
-    capacity: 5,
-    fueld: 'Gasoline',
-    transmission: 'Automatic'
-  }
-]
-
-export const columns: ColumnDef<Vehicles>[] = [
-  {
-    accessorKey: 'carMake',
-    header: ({ column }) => {
-      return (
-        <Button
-          variant='ghost'
-          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
-          Car Make
-          <ArrowUpDown className='ml-2 h-4 w-4' />
-        </Button>
-      )
-    },
-    cell: ({ row }) => (
-      <div className='capitalize'>{row.getValue('carMake')}</div>
-    )
-  },
-  {
-    accessorKey: 'model',
-    header: ({ column }) => {
-      return (
-        <Button
-          variant='ghost'
-          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
-          Model
-          <ArrowUpDown className='ml-2 h-4 w-4' />
-        </Button>
-      )
-    },
-    cell: ({ row }) => <div className='capitalize'>{row.getValue('model')}</div>
-  },
-  {
-    accessorKey: 'year',
-    header: ({ column }) => {
-      return (
-        <Button
-          variant='ghost'
-          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
-          Año
-          <ArrowUpDown className='ml-2 h-4 w-4' />
-        </Button>
-      )
-    },
-    cell: ({ row }) => <div className='capitalize'>{row.getValue('year')}</div>
-  },
-  {
-    accessorKey: 'type',
-    header: ({ column }) => {
-      return (
-        <Button
-          variant='ghost'
-          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
-          Tipo
-          <ArrowUpDown className='ml-2 h-4 w-4' />
-        </Button>
-      )
-    },
-    cell: ({ row }) => <div className='capitalize'>{row.getValue('type')}</div>
-  },
-  {
-    accessorKey: 'price',
-    header: () => <div className='text-right'>Precio</div>,
-    cell: ({ row }) => {
-      const price = parseFloat(row.getValue('price'))
-
-      // Format the amount as a dollar amount
-      const formatted = new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'USD'
-      }).format(price)
-
-      return <div className='text-right font-medium'>{formatted}</div>
-    }
-  }
-]
-
-export default function useDataTable() {
+export default function DataTable() {
   const [sorting, setSorting] = useState<SortingState>([])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
@@ -393,5 +57,123 @@ export default function useDataTable() {
     }
   })
 
-  return { table }
+  return (
+    <TableCard>
+      <div className='flex items-center py-4'>
+        <Input
+          placeholder='Filtrar carros...'
+          value={(table.getState().globalFilter as string) ?? ''}
+          onChange={(event) => table.setGlobalFilter(event.target.value)}
+          className='max-w-sm'
+        />
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant='outline' className='ml-auto' size={'sm'}>
+              <Settings2 className='mr-2 h-4 w-4' /> Mostrar
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align='end'>
+            {table
+              .getAllColumns()
+              .filter((column) => column.getCanHide())
+              .map((column) => {
+                return (
+                  <DropdownMenuCheckboxItem
+                    key={column.id}
+                    className='capitalize'
+                    checked={column.getIsVisible()}
+                    onCheckedChange={(value) =>
+                      column.toggleVisibility(!!value)
+                    }>
+                    {column.id}
+                  </DropdownMenuCheckboxItem>
+                )
+              })}
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
+      <div className='rounded-md border'>
+        <Table>
+          <TableHeader>
+            {table.getHeaderGroups().map((headerGroup) => (
+              <TableRow key={headerGroup.id}>
+                {headerGroup.headers.map((header) => {
+                  return (
+                    <TableHead key={header.id}>
+                      {header.isPlaceholder
+                        ? null
+                        : flexRender(
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
+                    </TableHead>
+                  )
+                })}
+              </TableRow>
+            ))}
+          </TableHeader>
+          <TableBody>
+            {table.getRowModel().rows?.length ? (
+              table.getRowModel().rows.map((row) => (
+                <TableRow
+                  key={row.id}
+                  data-state={row.getIsSelected() && 'selected'}>
+                  {row.getVisibleCells().map((cell) => (
+                    <TableCell key={cell.id}>
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext()
+                      )}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell
+                  colSpan={columns.length}
+                  className='h-24 text-center'>
+                  No results.
+                </TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </div>
+      <div className='flex items-center justify-end space-x-2 py-4'>
+        <div className='flex-1 text-sm text-muted-foreground'>
+          {table.getFilteredSelectedRowModel().rows.length} of{' '}
+          {table.getFilteredRowModel().rows.length} row(s) selected.
+        </div>
+        <div className='space-x-2'>
+          <Button
+            variant='outline'
+            size='sm'
+            onClick={() => table.previousPage()}
+            disabled={!table.getCanPreviousPage()}>
+            Previous
+          </Button>
+          <Button
+            variant='outline'
+            size='sm'
+            onClick={() => table.nextPage()}
+            disabled={!table.getCanNextPage()}>
+            Next
+          </Button>
+        </div>
+      </div>
+    </TableCard>
+  )
+}
+
+const TableCard = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <Card>
+      <CardHeader className='px-7'>
+        <CardTitle>Vehicles</CardTitle>
+        {/* <CardDescription>Recent orders from your store.</CardDescription> */}
+      </CardHeader>
+      <CardContent>{children}</CardContent>
+    </Card>
+  )
 }
