@@ -1,0 +1,29 @@
+version: "4"
+services:
+  backendapp:
+    container_name: "rentacarcontainer"
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - DATABASE_URL=jdbc:mysql://rentacardb:3306/rent_car_db
+      - DATABASE_USER=root
+      - DATABASE_PASSWORD=e@4B5Z*w
+    depends_on:
+      - rentacardb
+
+  rentacardb:
+    container_name: "rentacardbcontainer"
+    image: "mysql:8.0"
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: "rent_car_db"
+      MYSQL_USER: "admin"
+      MYSQL_PASSWORD: "e@4B5Z*w"
+      MYSQL_ROOT_PASSWORD: "e@4B5Z*w"
+volumes:
+  mysql-data:
+    external: false
