@@ -1,13 +1,6 @@
 'use client'
 
 import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuTrigger
-} from '@/components/ui/dropdown-menu'
-import { Input } from '@/components/ui/input'
-import {
   Table,
   TableBody,
   TableCell,
@@ -20,6 +13,8 @@ import {
   ColumnFiltersState,
   flexRender,
   getCoreRowModel,
+  getFacetedRowModel,
+  getFacetedUniqueValues,
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
@@ -27,10 +22,11 @@ import {
   useReactTable,
   VisibilityState
 } from '@tanstack/react-table'
-import { ChevronDown, Settings2 } from 'lucide-react'
 import React, { useState } from 'react'
 import { data, columns } from './columns'
 import { Button } from '@/components/ui/button'
+import { cn } from '@/lib/utils'
+import { DataTableToolbar } from './data-table-toolbar'
 
 export default function DataTable() {
   const [sorting, setSorting] = useState<SortingState>([])
@@ -41,14 +37,16 @@ export default function DataTable() {
   const table = useReactTable({
     data,
     columns,
+    onRowSelectionChange: setRowSelection,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
+    onColumnVisibilityChange: setColumnVisibility,
     getCoreRowModel: getCoreRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
-    onColumnVisibilityChange: setColumnVisibility,
-    onRowSelectionChange: setRowSelection,
+    getFacetedRowModel: getFacetedRowModel(),
+    getFacetedUniqueValues: getFacetedUniqueValues(),
     state: {
       sorting,
       columnFilters,
@@ -60,37 +58,7 @@ export default function DataTable() {
   return (
     <TableCard>
       <div className='flex items-center py-4'>
-        <Input
-          placeholder='Filtrar carros...'
-          value={(table.getState().globalFilter as string) ?? ''}
-          onChange={(event) => table.setGlobalFilter(event.target.value)}
-          className='max-w-sm'
-        />
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant='outline' className='ml-auto' size={'sm'}>
-              <Settings2 className='mr-2 h-4 w-4' /> Mostrar
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align='end'>
-            {table
-              .getAllColumns()
-              .filter((column) => column.getCanHide())
-              .map((column) => {
-                return (
-                  <DropdownMenuCheckboxItem
-                    key={column.id}
-                    className='capitalize'
-                    checked={column.getIsVisible()}
-                    onCheckedChange={(value) =>
-                      column.toggleVisibility(!!value)
-                    }>
-                    {column.id}
-                  </DropdownMenuCheckboxItem>
-                )
-              })}
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <DataTableToolbar table={table} />
       </div>
       <div className='rounded-md border'>
         <Table>
@@ -119,7 +87,11 @@ export default function DataTable() {
                   key={row.id}
                   data-state={row.getIsSelected() && 'selected'}>
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
+                    <TableCell
+                      key={cell.id}
+                      className={cn({
+                        'hidden sm:table-cell': cell.id === 'image'
+                      })}>
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()

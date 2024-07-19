@@ -3,6 +3,7 @@
 import { Button } from '@/components/ui/button'
 import { ColumnDef } from '@tanstack/react-table'
 import { ArrowUpDown } from 'lucide-react'
+import Image from 'next/image'
 
 export const data: Vehicles[] = [
   {
@@ -284,6 +285,20 @@ export type Vehicles = {
 
 export const columns: ColumnDef<Vehicles>[] = [
   {
+    id: 'image',
+    cell: () => {
+      return (
+        <Image
+          alt='Product image'
+          className='aspect-square rounded-md object-cover'
+          height='64'
+          src='https://ui.shadcn.com/placeholder.svg'
+          width='64'
+        />
+      )
+    }
+  },
+  {
     id: 'description',
     accessorFn: (row) => `${row.carMake} ${row.model} ${row.year}`,
     header: ({ column }) => {
@@ -311,7 +326,10 @@ export const columns: ColumnDef<Vehicles>[] = [
     },
     cell: ({ row }) => (
       <div className='capitalize'>{row.getValue('carMake')}</div>
-    )
+    ),
+    filterFn: (row, id, value) => {
+      return value.includes(row.getValue(id))
+    }
   },
   {
     accessorKey: 'model',
@@ -353,7 +371,10 @@ export const columns: ColumnDef<Vehicles>[] = [
         </Button>
       )
     },
-    cell: ({ row }) => <div className='capitalize'>{row.getValue('type')}</div>
+    cell: ({ row }) => <div className='capitalize'>{row.getValue('type')}</div>,
+    filterFn: (row, id, value) => {
+      return value.includes(row.getValue(id))
+    }
   },
   {
     accessorKey: 'transmission',
