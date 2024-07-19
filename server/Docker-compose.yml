@@ -1,29 +1,39 @@
 version: "4"
 services:
   backendapp:
+    image: backend-app-img
     container_name: "rentacarcontainer"
-    build: .
+    #Construira la imagen del proyecto desde el dockerfile
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
       - "8080:8080"
+    networks:
+      - backend-db-net
     environment:
-      - DATABASE_URL=jdbc:mysql://rentacardb:3306/rent_car_db
-      - DATABASE_USER=root
-      - DATABASE_PASSWORD=e@4B5Z*w
+      - DATABASE_URL=jdbc:mysql://rentacardbcontainer:3306/rent_car_db
+      - DATABASE_USER=userdb
+      - DATABASE_PASSWORD=admin
     depends_on:
-      - rentacardb
+      - mysql
 
-  rentacardb:
+  mysql:
+    #El nombre del contenedor sera el host al cual nos vamos a conectar
     container_name: "rentacardbcontainer"
-    image: "mysql:8.0"
+    image: "mysql"
     ports:
       - "3307:3306"
+    networks:
+      - backend-db-net
     volumes:
       - mysql-data:/var/lib/mysql
     environment:
       MYSQL_DATABASE: "rent_car_db"
-      MYSQL_USER: "admin"
-      MYSQL_PASSWORD: "e@4B5Z*w"
-      MYSQL_ROOT_PASSWORD: "e@4B5Z*w"
+      MYSQL_USER: "userdb"
+      MYSQL_PASSWORD: "admin"
+      MYSQL_ROOT_PASSWORD: "admin"
+networks:
+  backend-db-net:
 volumes:
   mysql-data:
-    external: false

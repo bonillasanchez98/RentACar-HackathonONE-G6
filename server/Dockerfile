@@ -1,6 +1,29 @@
-FROM openjdk:21
-LABEL authors="JOSE"
+#IMAGEN MODELO SACADA DE DOCKERHUB
+FROM eclipse-temurin:21.0.3_9-jdk
 
-COPY target/*.jar backend-rentacar.jar
+#PUERTO POR EL CUAL SE EXPONDRA NUESTRO CONTENEDOR
+EXPOSE 8080
 
-ENTRYPOINT ["java", "-jar", "/backend-rentacar.jar"]
+#CREAR DIRECTORIO RAIZ DE NUESTRO CONTENEDOR
+WORKDIR /root
+
+#ARCHIVOS QUE SE COPIARAN DE NUESTRO PROYECTO A NUESTRO CONTENEDOR
+COPY ./pom.xml /root
+COPY ./.mvn /root/.mvn
+COPY ./mvnw /root
+
+#CORRERA EL COMANDO DEL MAVEN WRAPPER PARA DESCARGAR LAS DEPENDENCIAS DENTRO DEL CONTENEDOR
+RUN ./mvnw dependency:go-offline
+
+#COPIARA EL CODIGO FUENTE DE LA APLICACION A NUESTRO CONTENEDRO
+COPY ./src /root/src
+
+#EJECUTARA EL CODGIO A CONTINUACION PARA CONSTRUIR LA APLICACION Y SE GENERE EL .JAR
+RUN ./mvnw clean install -DskipTests
+
+#LAVANTA EL CONTENEDOR
+ENTRYPOINT ["java", "-jar", "/root/target/hackathon-0.0.1-SNAPSHOT.jar"]
+
+#PARA CONSTRUIR LA IMAGEN:
+#docker build -t (-tag) "nombre-imagen" ./ (ubicacion donde se encuentra el dockerfile)
+#docker build -t "backend-rentacar-img"  .
