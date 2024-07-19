@@ -1,8 +1,9 @@
 'use client'
 
+import { ArrowUpDown } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { ColumnDef } from '@tanstack/react-table'
-import { ArrowUpDown } from 'lucide-react'
+import DialogViewCar from '../dialog-view-car/DialogViewCar'
 import Image from 'next/image'
 
 export const data: Vehicles[] = [
@@ -422,5 +423,9 @@ export const columns: ColumnDef<Vehicles>[] = [
 
       return <div className='text-right font-medium'>{formatted}</div>
     }
+  },
+  {
+    id: 'actions',
+    cell: () => <DialogViewCar />
   }
 ]

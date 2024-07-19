@@ -113,7 +113,7 @@ export default function DataTable() {
         </Table>
       </div>
       <div className='flex items-center justify-end space-x-2 py-4'>
-        <div className='flex-1 text-sm text-muted-foreground'>
+        <div className='hidden flex-1 text-sm text-muted-foreground'>
           {table.getFilteredSelectedRowModel().rows.length} of{' '}
           {table.getFilteredRowModel().rows.length} row(s) selected.
         </div>
@@ -142,7 +142,7 @@ const TableCard = ({ children }: { children: React.ReactNode }) => {
   return (
     <Card>
       <CardHeader className='px-7'>
-        <CardTitle>Vehicles</CardTitle>
+        <CardTitle>Vehiculos</CardTitle>
         {/* <CardDescription>Recent orders from your store.</CardDescription> */}
       </CardHeader>
       <CardContent>{children}</CardContent>

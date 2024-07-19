@@ -35,7 +35,7 @@ export function DataTableToolbar<TData>({
     <div className='w-full flex flex-col gap-2 items-center md:flex-row md:justify-between'>
       <div className='w-full flex flex-col flex-1 space-y-2 md:items-center md:flex-row md:space-x-2 md:space-y-0'>
         <Input
-          placeholder='Filtrar vehivulos...'
+          placeholder='Filtrar vehiculos...'
           value={(table.getState().globalFilter as string) ?? ''}
           onChange={(event) => table.setGlobalFilter(event.target.value)}
           className='w-full h-8 md:w-[150px] lg:w-[250px]'
@@ -62,7 +62,7 @@ export function DataTableToolbar<TData>({
               table.resetColumnFilters()
             }}
             className='h-8 px-2 lg:px-3'>
-            Reset
+            Limpiar
             <XIcon className='ml-2 h-4 w-4' />
           </Button>
         )}

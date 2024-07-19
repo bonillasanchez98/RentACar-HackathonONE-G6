@@ -30,7 +30,7 @@ import { Label } from '@/components/ui/label'
 import React, { useState } from 'react'
 import { PlusCircle } from 'lucide-react'
 
-export default function DrawerDialogDemo() {
+export default function DialogCreateCar() {
   const [open, setOpen] = useState(false)
   const isDesktop = useMediaQuery('(min-width: 768px)')
 
