@@ -24,22 +24,22 @@ import {
   DrawerPortal,
   DrawerOverlay
 } from '@/components/ui/drawer'
-
 import React, { useState } from 'react'
-import { PlusCircle } from 'lucide-react'
+import { PlusCircle, PencilIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
-interface CustomDialogProps extends CustomDialogButtonProps {
+interface CustomDialogProps {
   children: React.ReactNode
-  title?: string | React.ReactNode
-  description?: boolean | string | React.ReactNode
+  title: string | React.ReactNode
+  btnType?: 'default' | 'edit'
+  btnText?: boolean | string
 }
 
 export default function CustomDialog({
   children,
   title,
-  description,
-  btnText
+  btnText,
+  btnType = 'default'
 }: CustomDialogProps) {
   const [open, setOpen] = useState(false)
   const isDesktop = useMediaQuery('(min-width: 768px)')
@@ -48,8 +48,17 @@ export default function CustomDialog({
     return (
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button size='sm' className='h-8 gap-1'>
-            <PlusCircle className='h-3.5 w-3.5' />
+          <Button
+            size='sm'
+            className={cn('h-8 gap-1', {
+              'bg-yellow-400 text-white hover:bg-yellow-400/90':
+                btnType === 'edit'
+            })}>
+            {btnType === 'default' ? (
+              <PlusCircle className='h-3.5 w-3.5' />
+            ) : (
+              <PencilIcon className='h-3.5 w-3.5' />
+            )}
             <span className='sr-only sm:not-sr-only sm:whitespace-nowrap'>
               {btnText ? <>{btnText}</> : 'Nuevo item'}
             </span>
@@ -57,10 +66,10 @@ export default function CustomDialog({
         </DialogTrigger>
         <DialogContent className='sm:max-w-[520px]'>
           <DialogHeader>
-            {title ?? <DialogTitle>{title}</DialogTitle>}
-            {description ?? (
-              <DialogDescription>{description}</DialogDescription>
-            )}
+            <DialogTitle>{title}</DialogTitle>
+            <DialogDescription>
+              Todos los campos con(*) son obligatorios
+            </DialogDescription>
           </DialogHeader>
           {children}
           <DialogFooter>
@@ -78,8 +87,17 @@ export default function CustomDialog({
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
-        <Button size='sm' className='h-8 gap-1'>
-          <PlusCircle className='h-3.5 w-3.5' />
+        <Button
+          size='sm'
+          className={cn('h-8 gap-1', {
+            'bg-yellow-400 text-white hover:bg-yellow-400/90':
+              btnType === 'edit'
+          })}>
+          {btnType === 'default' ? (
+            <PlusCircle className='h-3.5 w-3.5' />
+          ) : (
+            <PencilIcon className='h-3.5 w-3.5' />
+          )}
           <span className='sr-only sm:not-sr-only sm:whitespace-nowrap'>
             {btnText ? <>{btnText}</> : 'Nuevo item'}
           </span>
@@ -89,10 +107,10 @@ export default function CustomDialog({
         <DrawerOverlay />
         <DrawerContent className='max-h-[94%]'>
           <DrawerHeader className='text-left'>
-            {title ?? <DrawerTitle>{title}</DrawerTitle>}
-            {description ?? (
-              <DrawerDescription>{description}</DrawerDescription>
-            )}
+            <DrawerTitle>{title}</DrawerTitle>
+            <DrawerDescription>
+              Todos los campos con(*) son obligatorios
+            </DrawerDescription>
           </DrawerHeader>
           <div className='.max-w-md w-full .mx-auto flex flex-col overflow-auto .p-2'>
             {children}
@@ -107,25 +125,5 @@ export default function CustomDialog({
         </DrawerContent>
       </DrawerPortal>
     </Drawer>
-  )
-}
-
-interface CustomDialogButtonProps {
-  btnType?: 'default' | 'edit'
-  btnText?: boolean | string
-}
-
-const CustomDialogButton = ({ btnText, btnType }: CustomDialogButtonProps) => {
-  return (
-    <Button
-      size='sm'
-      className={cn('h-8 gap-1', {
-        'bg-yellow-400 text-white': btnType === 'edit'
-      })}>
-      <PlusCircle className='h-3.5 w-3.5' />
-      <span className='sr-only sm:not-sr-only sm:whitespace-nowrap'>
-        {btnText ? <>{btnText}</> : 'Nuevo item'}
-      </span>
-    </Button>
   )
 }

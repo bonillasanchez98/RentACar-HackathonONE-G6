@@ -8,7 +8,7 @@ import { Label } from '@radix-ui/react-label'
 
 export default function DialogViewCar() {
   return (
-    <CustomDialog title='Ver vehiculo' btnText='Editar' description>
+    <CustomDialog title='Ver vehiculo' btnText='Editar' btnType='edit'>
       <FormEditCar />
     </CustomDialog>
   )
@@ -23,7 +23,10 @@ function FormEditCar({
 }) {
   return (
     <form
-      className={cn('grid items-start gap-4 md:grid-cols-2', className)}
+      className={cn(
+        'grid items-start gap-4 md:grid-cols-2 px-4 md:px-0',
+        className
+      )}
       onSubmit={(event) => {
         event.preventDefault()
         setOpen(false)
