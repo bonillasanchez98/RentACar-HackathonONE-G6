@@ -12,6 +12,7 @@ COPY ./pom.xml /root
 COPY ./.mvn /root/.mvn
 COPY ./mvnw /root
 
+RUN chmod +x mvnw
 #CORRERA EL COMANDO DEL MAVEN WRAPPER PARA DESCARGAR LAS DEPENDENCIAS DENTRO DEL CONTENEDOR
 RUN ./mvnw dependency:go-offline
 
