@@ -15,6 +15,7 @@ services:
       - DATABASE_URL=jdbc:mysql://rentacardbcontainer:3306/rent_car_db
       - DATABASE_USER=userdb
       - DATABASE_PASSWORD=admin
+      - PORT=8080
     depends_on:
       - mysql
 

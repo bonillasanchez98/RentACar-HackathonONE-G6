@@ -23,7 +23,7 @@ COPY ./src /root/src
 RUN ./mvnw clean install -DskipTests
 
 #LAVANTA EL CONTENEDOR
-ENTRYPOINT ["java", "-jar", "/root/target/hackathon-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-jar", "/root/target/hackathon-0.0.1-SNAPSHOT.jar"]
 
 #PARA CONSTRUIR LA IMAGEN:
 #docker build -t (-tag) "nombre-imagen" ./ (ubicacion donde se encuentra el dockerfile)
