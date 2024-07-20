@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button'
 import { ColumnDef } from '@tanstack/react-table'
 import DialogViewCar from '../dialog-view-car/DialogViewCar'
 import Image from 'next/image'
+import PlaceHolderImage from '@/public/images/placeholder.svg'
 
 export const data: Vehicles[] = [
   {
@@ -293,7 +294,7 @@ export const columns: ColumnDef<Vehicles>[] = [
           alt='Product image'
           className='aspect-square rounded-md object-cover'
           height='64'
-          src='https://ui.shadcn.com/placeholder.svg'
+          src={PlaceHolderImage}
           width='64'
         />
       )
