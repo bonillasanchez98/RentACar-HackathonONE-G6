@@ -27,13 +27,6 @@ export default function Home() {
                 @bonillasanchez98
               </a>
             </li>
-            <li className='inline mr-2 md:after:content-["•"] md:after:ml-2 md:last:after:content-[""]'>
-              <a
-                href='https://github.com/TheJose24'
-                className='italic hover:underline'>
-                @TheJose24
-              </a>
-            </li>
           </ul>
         </div>
       </main>
