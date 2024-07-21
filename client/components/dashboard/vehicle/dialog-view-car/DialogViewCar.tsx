@@ -1,6 +1,6 @@
 'use client'
 
-import CustomDialog from '@/components/CustomDialog'
+import CustomDialog from '@/components/custom-dialog'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { cn } from '@/lib/utils'
