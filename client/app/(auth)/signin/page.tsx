@@ -6,8 +6,8 @@ import {
   CardHeader,
   CardTitle
 } from '@/components/ui/card'
-import BaseLayout from '@/components/BaseLayout'
-import SignInForm from './SignInForm'
+import BaseLayout from '@/components/base-layout'
+import FormSignIn from '@/components/form-signin'
 
 export default function page() {
   return (
@@ -22,7 +22,7 @@ export default function page() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <SignInForm />
+            <FormSignIn />
             <div className='mt-4 text-center text-sm'>
               Don&apos;t have an account?{' '}
               <Link href='/signup' className='underline'>

@@ -1,6 +1,6 @@
 import Hero from '@/components/landing-page/Hero'
 import CarouselBrands from '@/components/landing-page/CarouselBrands'
-import BaseLayout from '@/components/BaseLayout'
+import BaseLayout from '@/components/base-layout'
 
 export default function Home() {
   return (

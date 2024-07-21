@@ -7,8 +7,8 @@ import {
   CardHeader,
   CardTitle
 } from '@/components/ui/card'
-import BaseLayout from '@/components/BaseLayout'
-import SignUpForm from './SignUpForm'
+import BaseLayout from '@/components/base-layout'
+import FormSignUp from '@/components/form-signup'
 
 export default function LoginForm() {
   return (
@@ -22,7 +22,7 @@ export default function LoginForm() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <SignUpForm />
+            <FormSignUp />
             <div className='mt-4 text-center text-sm'>
               Already have an account?{' '}
               <Link href='/signin' className='underline'>
