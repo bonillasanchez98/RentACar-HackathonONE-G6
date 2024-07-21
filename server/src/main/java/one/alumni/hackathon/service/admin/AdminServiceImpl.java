@@ -49,7 +49,7 @@ public class AdminServiceImpl implements AdminService{
     @Override
     public CarDto getCarById(Long id) {
         Optional<Car> optCar = carRepository.findById(id);
-        return optCar.map(Car::getCarDto).orElse(null);
+        return optCar.map(Car::getCarDto).orElse(new CarDto());
     }
 
     @Override
