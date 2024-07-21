@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: backend-app-img
+    port: 8080
+    docker:
+      context: .
+      dockerfile: Dockerfile
+    env:
+      - PORT = 8080

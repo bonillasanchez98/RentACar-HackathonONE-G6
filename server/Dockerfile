@@ -1,5 +1,5 @@
 #IMAGEN MODELO SACADA DE DOCKERHUB
-FROM eclipse-temurin:21.0.3_9-jdk
+FROM eclipse-temurin:17-jdk
 
 #PUERTO POR EL CUAL SE EXPONDRA NUESTRO CONTENEDOR
 EXPOSE 8080
@@ -12,6 +12,7 @@ COPY ./pom.xml /root
 COPY ./.mvn /root/.mvn
 COPY ./mvnw /root
 
+RUN chmod +x mvnw
 #CORRERA EL COMANDO DEL MAVEN WRAPPER PARA DESCARGAR LAS DEPENDENCIAS DENTRO DEL CONTENEDOR
 RUN ./mvnw dependency:go-offline
 
@@ -22,7 +23,7 @@ COPY ./src /root/src
 RUN ./mvnw clean install -DskipTests
 
 #LAVANTA EL CONTENEDOR
-ENTRYPOINT ["java", "-jar", "/root/target/hackathon-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-jar", "/root/target/hackathon-0.0.1-SNAPSHOT.jar"]
 
 #PARA CONSTRUIR LA IMAGEN:
 #docker build -t (-tag) "nombre-imagen" ./ (ubicacion donde se encuentra el dockerfile)
