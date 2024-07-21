@@ -27,7 +27,8 @@ public class AuthServiceImpl implements AuthService{
         //Se setea el id del usuario guardado en una instancia de userDto y la misma se retorna
         UserDto userDto = new UserDto();
         userDto.setId_user(userCreated.getId_user());
-
+        userDto.setUsername(userCreated.getUsername());
+        userDto.setEmail(userCreated.getEmail());
         return userDto;
     }
 

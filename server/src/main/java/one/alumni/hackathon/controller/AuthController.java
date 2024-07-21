@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/rentCar/auth")
 @RequiredArgsConstructor
@@ -22,9 +25,12 @@ public class AuthController {
     public ResponseEntity<?> signupCustomer(@RequestBody SignupRequest signupRequest){
 
         //Validando que el email que venga no exista
-        if(authService.isCustomerEmailExists(signupRequest.getEmail()))
-            return new ResponseEntity<>("Customer with email ["+ signupRequest.getEmail() + "] already exists",
-                    HttpStatus.NOT_ACCEPTABLE);
+        if(authService.isCustomerEmailExists(signupRequest.getEmail())){
+            Map<String, String> map = new HashMap<>();
+            map.put("Message: ","Customer with email ["+ signupRequest.getEmail() + "] already exists");
+            map.put("Status: ","401");
+            return new ResponseEntity<>(map, HttpStatus.UNAUTHORIZED);
+        }
 
         UserDto createdCustomer = authService.createdCustomer(signupRequest);
         if(createdCustomer == null)
