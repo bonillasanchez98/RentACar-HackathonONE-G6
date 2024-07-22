@@ -31,3 +31,15 @@ export const signUpSchema = z.object({
       message: 'El contraseña debe tener menos 32 caracteres'
     })
 })
+
+export const createCarSchema = z.object({
+  brand: z.string(),
+  model: z.string(),
+  year: z.number(),
+  color: z.string(),
+  capacity: z.string(),
+  transmission: z.string(),
+  fuel: z.string(),
+  vehicleType: z.string(),
+  price: z.number()
+})

@@ -29,6 +29,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import React, { useState } from 'react'
 import { PlusCircle } from 'lucide-react'
+import FormCreateCar from '@/components/form-createcar'
 
 export default function DialogCreateCar() {
   const [open, setOpen] = useState(false)
@@ -52,7 +53,8 @@ export default function DialogCreateCar() {
               Todos los campos con(*) son obligatorios
             </DialogDescription>
           </DialogHeader>
-          <CreateCarFrom setOpen={setOpen} />
+          {/* <CreateCarFrom setOpen={setOpen} /> */}
+          <FormCreateCar />
           <DialogFooter>
             <DialogClose asChild>
               <Button className='w-full bg-black text-white hover:bg-black/90'>
@@ -85,7 +87,8 @@ export default function DialogCreateCar() {
             </DrawerDescription>
           </DrawerHeader>
           <div className='.max-w-md w-full .mx-auto flex flex-col overflow-auto .p-2'>
-            <CreateCarFrom className='px-4' setOpen={setOpen} />
+            {/* <CreateCarFrom className='px-4' setOpen={setOpen} /> */}
+            <FormCreateCar />
             <DrawerFooter className='pt-2'>
               <DrawerClose asChild>
                 <Button className='w-full bg-black text-white hover:bg-black/90'>

@@ -10,6 +10,7 @@ const authRoutes = ['/signin', '/signup']
 const customerRoutes = ['/dashboard', '/profile']
 const adminRoutes = ['/admin', '/admin/vehicles', '/admin/bookings']
 const apiAuthPrefix = '/api/auth'
+const apiCarsPrefix = '/api/cars'
 
 export default auth(async (req) => {
   const { nextUrl } = req
@@ -19,6 +20,11 @@ export default auth(async (req) => {
 
   // Permitir todas las rutas de API de autenticación
   if (nextUrl.pathname.startsWith(apiAuthPrefix)) {
+    return NextResponse.next()
+  }
+
+  // Permitir todas las rutas de API de vehiculos
+  if (nextUrl.pathname.startsWith(apiCarsPrefix)) {
     return NextResponse.next()
   }
 
