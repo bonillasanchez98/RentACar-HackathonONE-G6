@@ -1,5 +1,5 @@
-import DataTable from '@/components/dashboard/vehicle/data-table-vehicles/DataTable'
-import DialogCreateCar from '@/components/dashboard/vehicle/dialog-create-car/DialogCreateCard'
+import DataTable from '@/components/admin/vehicle/data-table-vehicles/DataTable'
+import DialogCreateCar from '@/components/admin/vehicle/dialog-create-car/DialogCreateCard'
 
 export default function page() {
   return (

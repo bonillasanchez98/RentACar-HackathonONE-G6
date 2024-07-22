@@ -14,12 +14,9 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { signInSchema } from '@/lib/zod'
-import { signIn, getSession } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
+import { signIn } from 'next-auth/react'
 
 export default function FormSignIn() {
-  const route = useRouter()
-
   // 1. Define your form.
   const form = useForm<z.infer<typeof signInSchema>>({
     resolver: zodResolver(signInSchema),
@@ -43,12 +40,7 @@ export default function FormSignIn() {
     if (res?.error) {
       console.log(res.error)
     } else {
-      const session = await getSession()
-
-      if (session?.user.role === 'admin') return route.push('/admin')
-      if (session?.user.role === 'customer') return route.push('/dashboard')
-
-      return route.refresh()
+      console.log('Enviando a dashboard')
     }
   }
 

@@ -19,9 +19,9 @@ import { cn } from '@/lib/utils'
 import ButtonSignOut from '@/components/admin/vehicle/button-signout'
 
 const navLinks = [
-  { name: 'Dashboard', href: '/dashboard' },
-  { name: 'Vehicles', href: '/dashboard/vehicles' },
-  { name: 'Bookings', href: '/dashboard/bookings' }
+  { name: 'Dashboard', href: '/admin' },
+  { name: 'Vehicles', href: '/admin/vehicles' },
+  { name: 'Bookings', href: '/admin/bookings' }
 ]
 
 export default function layout({ children }: { children: React.ReactNode }) {

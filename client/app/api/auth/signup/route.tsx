@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import bcrypt from 'bcrypt'
+import { AuthError } from 'next-auth'
 
 export async function POST(request: NextRequest) {
   try {
@@ -35,11 +36,10 @@ export async function POST(request: NextRequest) {
       ok: true
     })
   } catch (error) {
-    if (error instanceof Error) {
+    if (error instanceof AuthError) {
       return NextResponse.json({
-        status: 500,
         ok: false,
-        message: error.message
+        message: error.cause?.err?.message
       })
     } else {
       return NextResponse.json({

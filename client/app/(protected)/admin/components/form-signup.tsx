@@ -13,42 +13,37 @@ import { Input } from '@/components/ui/input'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { signInSchema } from '@/lib/zod'
-import { signIn, getSession } from 'next-auth/react'
+import { signUpSchema } from '@/lib/zod'
 import { useRouter } from 'next/navigation'
 
-export default function FormSignIn() {
-  const route = useRouter()
+export default function FormSignUp() {
+  const router = useRouter()
 
   // 1. Define your form.
-  const form = useForm<z.infer<typeof signInSchema>>({
-    resolver: zodResolver(signInSchema),
+  const form = useForm<z.infer<typeof signUpSchema>>({
+    resolver: zodResolver(signUpSchema),
     defaultValues: {
+      username: '',
       email: '',
       password: ''
     }
   })
 
   // 2. Define a submit handler.
-  async function onSubmit(values: z.infer<typeof signInSchema>) {
+  async function onSubmit(values: z.infer<typeof signUpSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-
-    const res = await signIn('credentials', {
-      email: values.email,
-      password: values.password,
-      redirect: false
+    // console.log(values)
+    const res = await fetch('/api/auth/signup', {
+      method: 'POST',
+      body: JSON.stringify(values),
+      headers: {
+        'Content-Type': 'application/json'
+      }
     })
 
-    if (res?.error) {
-      console.log(res.error)
-    } else {
-      const session = await getSession()
-
-      if (session?.user.role === 'admin') return route.push('/admin')
-      if (session?.user.role === 'customer') return route.push('/dashboard')
-
-      return route.refresh()
+    if (res.ok) {
+      router.push('/signin')
     }
   }
 
@@ -56,6 +51,20 @@ export default function FormSignIn() {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <div className='space-y-4'>
+          <FormField
+            control={form.control}
+            name='username'
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Nombre</FormLabel>
+                <FormControl>
+                  <Input type='text' placeholder='John Doe' {...field} />
+                </FormControl>
+                <FormMessage className='text-xs' />
+              </FormItem>
+            )}
+          />
+
           <FormField
             control={form.control}
             name='email'
