@@ -14,8 +14,11 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { signUpSchema } from '@/lib/zod'
+import { useRouter } from 'next/navigation'
 
 export default function FormSignUp() {
+  const router = useRouter()
+
   // 1. Define your form.
   const form = useForm<z.infer<typeof signUpSchema>>({
     resolver: zodResolver(signUpSchema),
@@ -27,10 +30,21 @@ export default function FormSignUp() {
   })
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof signUpSchema>) {
+  async function onSubmit(values: z.infer<typeof signUpSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    console.log(values)
+    // console.log(values)
+    const res = await fetch('/api/auth/signup', {
+      method: 'POST',
+      body: JSON.stringify(values),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+
+    if (res.ok) {
+      router.push('/signin')
+    }
   }
 
   return (

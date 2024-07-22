@@ -14,6 +14,7 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { signInSchema } from '@/lib/zod'
+import { signIn } from 'next-auth/react'
 
 export default function FormSignIn() {
   // 1. Define your form.
@@ -26,10 +27,21 @@ export default function FormSignIn() {
   })
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof signInSchema>) {
+  async function onSubmit(values: z.infer<typeof signInSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    console.log(values)
+
+    const res = await signIn('credentials', {
+      email: values.email,
+      password: values.password,
+      redirect: false
+    })
+
+    if (res?.error) {
+      console.log(res.error)
+    } else {
+      console.log('Enviando a dashboard')
+    }
   }
 
   return (
