@@ -13,16 +13,15 @@ import {
 import { cn } from '@/lib/utils'
 
 const navLinks = [
-  { name: 'Reservar', href: '/' },
-  { name: 'Cómo funciona', href: '/' },
-  { name: 'Nuestra flota', href: '/' },
-  { name: 'Por qué nosotros', href: '/' },
-  { name: 'Soporte', href: '/' }
+  { name: 'Reservar', href: '/#' },
+  { name: 'Cómo funciona', href: '/#' },
+  { name: 'Nuestra flota', href: '/#' },
+  { name: 'Soporte', href: '/#' }
 ]
 
 export default function Header() {
   return (
-    <header className='sticky top-0 flex h-16 items-center gap-4 .border-b .bg-background px-4 backdrop-blur bg-white/0 md:px-6 lg:px-24 animate-nav-shadown'>
+    <header className='sticky top-0 flex h-16 items-center gap-4 px-4 backdrop-blur bg-white/0 md:px-6 lg:px-24 xl:px-48'>
       <nav className='w-full flex gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6'>
         <div className='w-full flex items-center gap-10'>
           <div className='flex justify-between flex-row-reverse items-center gap-3 w-full md:w-auto md:justify-start md:flex-row'>
@@ -69,7 +68,7 @@ export default function Header() {
           <NavLinks variant='desktop' />
         </div>
 
-        <div className='hidden gap-3 items-center md:flex'>
+        <div className='hidden gap-2 items-center md:flex'>
           <Button asChild>
             <Link href='/signin'>Sign In</Link>
           </Button>
@@ -103,7 +102,7 @@ const NavLinks = ({
         <li key={link.name}>
           <Link
             href={link.href}
-            className='text-muted-foreground transition-colors hover:text-foreground'>
+            className='text-muted-foreground transition-colors text-sm lg:text-base hover:text-foreground'>
             {link.name}
           </Link>
         </li>

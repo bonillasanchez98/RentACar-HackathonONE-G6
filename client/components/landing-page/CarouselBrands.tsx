@@ -33,7 +33,7 @@ export default function InfinityLogos() {
       opts={{
         loop: true
       }}
-      className='w-full lg:max-w-4xl mx-auto text-center my-10'>
+      className='w-full mx-auto pt-10 text-center lg:max-w-4xl'>
       <CarouselContent>
         <CarouselItem className='w-auto basis-[20%] md:basis-[13%]'>
           <ToyotaIcon className='size-10' />

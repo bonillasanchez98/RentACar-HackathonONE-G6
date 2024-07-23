@@ -5,30 +5,9 @@ import BaseLayout from '@/components/base-layout'
 export default function Home() {
   return (
     <BaseLayout>
-      <main className='flex min-h-screen flex-col items-center justify-between py-8 px-6 md:py-24 md:px-16 lg:px-24 lg:py-12'>
+      <main className='flex flex-col items-center grow py-8 px-4 md:px-6 lg:px-24 xl:px-48'>
         <Hero />
         <CarouselBrands />
-
-        <div className='text-center'>
-          <h2 className='font-semibold text-xl italic'>HackathonONE - G6</h2>
-
-          <ul className='flex flex-col items-center md:flex-row'>
-            <li className='inline mr-2 md:after:content-["•"] md:after:ml-2 md:last:after:content-[""]'>
-              <a
-                href='https://github.com/daldev14'
-                className='italic hover:underline'>
-                @daldev
-              </a>
-            </li>
-            <li className='inline mr-2 md:after:content-["•"] md:after:ml-2 md:last:after:content-[""]'>
-              <a
-                href='https://github.com/bonillasanchez98'
-                className='italic hover:underline'>
-                @bonillasanchez98
-              </a>
-            </li>
-          </ul>
-        </div>
       </main>
     </BaseLayout>
   )
