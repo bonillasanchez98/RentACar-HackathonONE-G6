@@ -13,7 +13,7 @@ import FormSignUp from '@/components/form-signup'
 export default function LoginForm() {
   return (
     <BaseLayout>
-      <main className='grid place-content-center py-16'>
+      <main className='grid place-content-center grow py-8 px-4 md:px-6 lg:px-24 xl:px-48'>
         <Card className='mx-auto'>
           <CardHeader>
             <CardTitle className='text-xl'>Sign Up</CardTitle>
@@ -24,7 +24,7 @@ export default function LoginForm() {
           <CardContent>
             <FormSignUp />
             <div className='mt-4 text-center text-sm'>
-              Already have an account?{' '}
+              ¿Ya tiene una cuenta?{' '}
               <Link href='/signin' className='underline'>
                 Sign in
               </Link>

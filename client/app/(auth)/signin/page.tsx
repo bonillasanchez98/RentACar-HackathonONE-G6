@@ -12,7 +12,7 @@ import FormSignIn from '@/components/form-signin'
 export default function page() {
   return (
     <BaseLayout>
-      <main className='grid place-content-center py-16'>
+      <main className='grid place-content-center grow py-8 px-4 md:px-6 lg:px-24 xl:px-48'>
         <Card className='mx-auto max-w-sm'>
           <CardHeader>
             <CardTitle className='text-2xl'>Login</CardTitle>
@@ -24,7 +24,7 @@ export default function page() {
           <CardContent>
             <FormSignIn />
             <div className='mt-4 text-center text-sm'>
-              Don&apos;t have an account?{' '}
+              ¿No tiene una cuenta?{' '}
               <Link href='/signup' className='underline'>
                 Sign up
               </Link>
