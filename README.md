@@ -14,6 +14,11 @@
 - Entrar en la carpeta server ejecutar el archivo `Docker-compose.yml`
 - Entrar en http://localhost:3000/
 
+- Credenciales base de datos
+  - Host: localhost
+  - Usuario: userdb
+  - Password: admin 
+
 <h3 align="left">Connect with us:</h3>
 <h2 align="left">https://github.com/bonillasanchez98</h2>
 <h2 align="left">https://github.com/daldev14</h2>
