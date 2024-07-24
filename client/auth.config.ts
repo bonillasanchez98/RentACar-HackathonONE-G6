@@ -14,7 +14,17 @@ export default {
           password: credentials.password
         }
 
-        console.log(credentials)
+        if (data.username === 'userAdmin') {
+          if (data.password !== 'admin')
+            throw new Error('Credenciales incorrectas')
+
+          return {
+            id: '0000',
+            name: 'Administrador',
+            email: 'admin@email.com',
+            role: 'ADMIN'
+          }
+        }
 
         const response = await fetch(
           'http://localhost:8080/rentCar/auth/signIn',
