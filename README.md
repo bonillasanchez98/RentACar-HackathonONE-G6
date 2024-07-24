@@ -1,6 +1,12 @@
 <h1 align="center">Rent a Car Backend Project Hackathon G6</h1>
 <img src="https://github.com/user-attachments/assets/f03e784f-8706-4460-bc4b-16679c36b1b7" />
 
+## Característica funcionales
+- Creación de cuentas
+- Inicio de sesión (autenticación)
+- Rutas protegidas (admin, customer)
+- Crear vehiculos (administrador)
+
 <h3 align="left">Connect with us:</h3>
 <h2 align="left">https://github.com/bonillasanchez98</h2>
 <h2 align="left">https://github.com/daldev14</h2>
