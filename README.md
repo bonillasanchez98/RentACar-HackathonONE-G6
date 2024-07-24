@@ -13,6 +13,8 @@
   - Username: userAdmin
   - Password: admin
   - Nota: solo para este usuario se puede crear vehiculos
+ 
+- Desde la ruta `/signup` solo se pueden crear usuario con rol customer
 
 ## Instrucciones
 - Entrar en la carpeta cliente ejecutar `pnpm i` luego `pnpm dev`
