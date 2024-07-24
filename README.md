@@ -1,5 +1,5 @@
 <h1 align="center">Rent a Car Backend Project Hackathon G6</h1>
-<h3 align="center">Rent a Car Backend Project Hackathon G6</h3>
+<img src="https://github.com/user-attachments/assets/f03e784f-8706-4460-bc4b-16679c36b1b7" />
 
 <h3 align="left">Connect with us:</h3>
 <h2 align="left">https://github.com/bonillasanchez98</h2>
