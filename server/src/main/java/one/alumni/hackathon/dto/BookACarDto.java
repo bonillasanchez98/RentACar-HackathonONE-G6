@@ -7,12 +7,14 @@ import one.alumni.hackathon.entity.enums.BookCarStatus;
 
 
 import java.text.DateFormat;
+import java.util.Date;
+
 @Data
 public class BookACarDto {
 
     private Long id_booking;
-    private DateFormat booking_start_date;
-    private DateFormat booking_end_date;
+    private Date booking_start_date;
+    private Date booking_end_date;
     private Long booking_days;
     private double price;
 

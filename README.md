@@ -1,4 +1,4 @@
-<h1 align="center">Rent a Car Backend Project Hackathon G6</h1>
+<h1 align="center">Rent a Car Project Hackathon G6</h1>
 <h3 align="center">Primer hackathon realizado en Alura, Grupo 6</h3>
 
 <h3 align="left">Languages and Tools:</h3>
