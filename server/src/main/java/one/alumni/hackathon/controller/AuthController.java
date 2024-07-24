@@ -47,7 +47,7 @@ public class AuthController {
         if(userSigIn !=  null){
             return new ResponseEntity<>(userSigIn, HttpStatus.OK);
         }
-            map.put("message","Customer don't exists");
+            map.put("message","Username or Password incorrect");
             map.put("status",401);
         return new ResponseEntity<>(map, HttpStatus.OK);
     }

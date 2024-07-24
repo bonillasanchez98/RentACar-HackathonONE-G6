@@ -40,7 +40,7 @@ public class CustomerServiceImpl implements CustomerService{
             bookACar.setCar(existCar);
             bookACar.setUser(optUser.get());
             bookACar.setBookCarStatus(BookCarStatus.APPROVED);
-            long dif = bookACar.getBooking_start_date().getTime() - bookACar.getBooking_end_date().getTime();
+            long dif = bookACarDto.getBooking_start_date().getTime() - bookACarDto.getBooking_end_date().getTime();
             long days = TimeUtil.computeStartOfNextDay(dif);
             bookACar.setBooking_days(days);
             bookACar.setPrice(existCar.getPrice() * days);
