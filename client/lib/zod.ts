@@ -9,7 +9,7 @@ export const signInSchema = z.object({
   password: z
     .string({ required_error: 'El campo es requerido' })
     .min(1, 'El campo es requerido')
-    .min(8, 'La contraseña debe tener más de 8 caracteres')
+    .min(4, 'La contraseña debe tener más de 8 caracteres')
     .max(32, {
       message: 'El contraseña debe tener menos 32 caracteres'
     })
