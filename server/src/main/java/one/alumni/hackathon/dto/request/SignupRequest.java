@@ -1,10 +1,11 @@
-package one.alumni.hackathon.dto;
+package one.alumni.hackathon.dto.request;
 
 import lombok.Data;
 
 @Data
 public class SignupRequest {
     private String email;
-    private String name;
+    private String username;
     private String password;
+
 }
