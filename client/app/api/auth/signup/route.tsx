@@ -9,8 +9,10 @@ export async function POST(request: NextRequest) {
     const newData = {
       ...data,
       name: data.username,
-      password: await bcrypt.hash(data.password, 10)
+      password: data.password
     }
+
+    // password: await bcrypt.hash(data.password, 10)
 
     const response = await fetch('http://localhost:8080/rentCar/auth/signup', {
       method: 'POST',

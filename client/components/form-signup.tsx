@@ -20,7 +20,6 @@ import { toast, Toaster } from 'sonner'
 export default function FormSignUp() {
   const router = useRouter()
 
-  // 1. Define your form.
   const form = useForm<z.infer<typeof signUpSchema>>({
     resolver: zodResolver(signUpSchema),
     defaultValues: {
@@ -30,26 +29,21 @@ export default function FormSignUp() {
     }
   })
 
-  // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof signUpSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    // console.log(values)
-    // const res = await fetch('/api/auth/signup', {
-    //   method: 'POST',
-    //   body: JSON.stringify(values),
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   }
-    // })
-
-    // if (res.ok) {
-    //   router.push('/signin')
-    // }
-
-    toast.success('Cuenta creada', {
-      description: 'Redireccionando...'
+    const res = await fetch('/api/auth/signup', {
+      method: 'POST',
+      body: JSON.stringify(values),
+      headers: {
+        'Content-Type': 'application/json'
+      }
     })
+
+    if (res.ok) {
+      toast.success('Cuenta creada', {
+        description: 'Redireccionando...'
+      })
+      router.push('/signin')
+    }
   }
 
   return (

@@ -5,39 +5,39 @@ export default {
   providers: [
     Credentials({
       credentials: {
-        email: {},
+        username: {},
         password: {}
       },
       authorize: async (credentials) => {
-        let user = null
-
-        if (credentials.email === 'daldev@email.com') {
-          user = {
-            name: 'Daniel',
-            email: 'daniel@email.com',
-            image: null,
-            role: 'admin'
-          }
-        }
-
-        if (credentials.email === 'customer@email.com') {
-          user = {
-            name: 'Customer',
-            email: 'customer@email.com',
-            image: null,
-            role: 'customer'
-          }
+        const data = {
+          username: credentials.username,
+          password: credentials.password
         }
 
         console.log(credentials)
 
-        if (user) {
-          // Si el usuario es válido, devuelve el objeto de usuario
-          return user
-        } else {
-          // Si las credenciales no son válidas, devuelve null
-          throw new Error('Invalid credentials')
-          return null
+        const response = await fetch(
+          'http://localhost:8080/rentCar/auth/signIn',
+          {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          }
+        )
+
+        const userFound = await response.json()
+
+        if (userFound.status === 401) {
+          throw new Error('Credenciales incorrectas')
+        }
+
+        return {
+          id: userFound.id,
+          name: userFound.username,
+          email: userFound.email,
+          role: userFound.userRole
         }
       }
     })

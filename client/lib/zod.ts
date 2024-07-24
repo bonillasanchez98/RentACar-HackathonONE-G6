@@ -1,10 +1,11 @@
 import { z } from 'zod'
 
 export const signInSchema = z.object({
-  email: z
+  username: z
     .string({ required_error: 'El campo es requerido' })
     .min(1, 'El campo es requerido')
-    .email('Correo electrónico no válido'),
+    .min(6, 'El nombre de usuario debe tener mas de 6 caracteres')
+    .regex(/^\S*$/, 'No se permiten espacios en blanco'),
   password: z
     .string({ required_error: 'El campo es requerido' })
     .min(1, 'El campo es requerido')
