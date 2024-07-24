@@ -1,7 +1,8 @@
 package one.alumni.hackathon.service.auth;
 
-import one.alumni.hackathon.dto.SignupRequest;
+import one.alumni.hackathon.dto.request.SignupRequest;
 import one.alumni.hackathon.dto.UserDto;
+import one.alumni.hackathon.entity.User;
 
 public interface AuthService {
 
@@ -9,4 +10,6 @@ public interface AuthService {
 
     //Metodo para validacion de email existente
     boolean isCustomerEmailExists(String email);
+
+    User signIn (String username, String password);
 }

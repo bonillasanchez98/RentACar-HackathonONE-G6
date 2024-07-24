@@ -1,8 +1,10 @@
 package one.alumni.hackathon.controller;
 
 import lombok.RequiredArgsConstructor;
-import one.alumni.hackathon.dto.SignupRequest;
+import one.alumni.hackathon.dto.request.SignInRequest;
+import one.alumni.hackathon.dto.request.SignupRequest;
 import one.alumni.hackathon.dto.UserDto;
+import one.alumni.hackathon.entity.User;
 import one.alumni.hackathon.service.auth.AuthServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,9 +28,9 @@ public class AuthController {
 
         //Validando que el email que venga no exista
         if(authService.isCustomerEmailExists(signupRequest.getEmail())){
-            Map<String, String> map = new HashMap<>();
-            map.put("Message: ","Customer with email ["+ signupRequest.getEmail() + "] already exists");
-            map.put("Status: ","401");
+            Map<String, Object> map = new HashMap<>();
+            map.put("message","Customer with email ["+ signupRequest.getEmail() + "] already exists");
+            map.put("status",401);
             return new ResponseEntity<>(map, HttpStatus.UNAUTHORIZED);
         }
 
@@ -36,6 +38,18 @@ public class AuthController {
         if(createdCustomer == null)
             return new ResponseEntity<>("Customer couldn't be created", HttpStatus.BAD_REQUEST);
         return new ResponseEntity<>(createdCustomer, HttpStatus.CREATED );
+    }
+
+    @PostMapping("/signIn")
+    public ResponseEntity<?> signInCustomer(@RequestBody SignInRequest signInRequest){
+        User userSigIn = authService.signIn(signInRequest.getUsername(), signInRequest.getPassword());
+            Map<String, Object> map = new HashMap<>();
+        if(userSigIn !=  null){
+            return new ResponseEntity<>(userSigIn, HttpStatus.OK);
+        }
+            map.put("message","Customer don't exists");
+            map.put("status",401);
+        return new ResponseEntity<>(map, HttpStatus.OK);
     }
 
 }

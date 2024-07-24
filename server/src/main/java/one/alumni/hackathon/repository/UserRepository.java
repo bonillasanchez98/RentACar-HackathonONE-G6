@@ -10,4 +10,6 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User, Long> {
     //Se declara de tipo Optional<> para oder acceder al metodo isPresent() y valida que exista
     Optional<User> findFirstByEmail(String email);
+
+    Optional<User> findByUsernameAndPassword(String username, String password);
 }

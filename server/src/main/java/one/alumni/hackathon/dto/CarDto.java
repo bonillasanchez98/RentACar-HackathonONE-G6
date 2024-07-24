@@ -1,5 +1,7 @@
 package one.alumni.hackathon.dto;
 
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import lombok.Data;
 import one.alumni.hackathon.entity.enums.CarTransmission;
 import one.alumni.hackathon.entity.enums.VehicleType;
@@ -13,6 +15,8 @@ public class CarDto {
     private Integer year;
     private String color;
     private String capacity;
+
+    @Enumerated(EnumType.STRING)
     private CarTransmission carTransmission;
     private String fuel;
     private VehicleType vehicleType;
