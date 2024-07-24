@@ -1,5 +1,7 @@
 <h1 align="center">Rent a Car Backend Project Hackathon G6</h1>
+
 <img src="https://github.com/user-attachments/assets/f03e784f-8706-4460-bc4b-16679c36b1b7" />
+<img src="https://github.com/user-attachments/assets/2afe7033-556b-4bc1-8df6-0756e94650b9" />
 
 ## Característica funcionales
 - Creación de cuentas
