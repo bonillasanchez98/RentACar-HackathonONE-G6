@@ -7,6 +7,11 @@
 - Rutas protegidas (admin, customer)
 - Crear vehiculos (administrador)
 
+## Instrucciones
+- Entrar en la carpeta cliente ejecutar `pnpm i` luego `pnpm dev`
+- Entrar en la carpeta server ejecutar el archivo `Docker-compose.yml`
+- Entrar en http://localhost:3000/
+
 <h3 align="left">Connect with us:</h3>
 <h2 align="left">https://github.com/bonillasanchez98</h2>
 <h2 align="left">https://github.com/daldev14</h2>
