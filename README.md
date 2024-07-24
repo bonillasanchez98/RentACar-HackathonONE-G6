@@ -9,6 +9,11 @@
 - Rutas protegidas (admin, customer)
 - Crear vehiculos (administrador)
 
+- Para entrar como usuario admin
+  - Username: userAdmin
+  - Password: admin
+  - Nota: solo para este usuario se puede crear vehiculos
+
 ## Instrucciones
 - Entrar en la carpeta cliente ejecutar `pnpm i` luego `pnpm dev`
 - Entrar en la carpeta server ejecutar el archivo `Docker-compose.yml`
